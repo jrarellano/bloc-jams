@@ -28,17 +28,6 @@ body {
     cursor: pointer;
 }
 
-.container {
-    margin: 0 auto;
-    max-width: 64rem;
-}
-
-.navbar .logo {
-    position: relative;
-    left: 2rem;
-    cursor: pointer;
-}
-
 .navbar .links-container {
      display: table;
      position: absolute;
@@ -48,8 +37,7 @@ body {
      color: white;
      text-decoration: none;
  }
-
-
+ 
  .links-container .navbar-link {
      display: table-cell;
      position: relative;
@@ -65,13 +53,19 @@ body {
      text-decoration: none;
      cursor: pointer;
  }
-
-.links-container .navbar-link:hover {
+ 
+ .links-container .navbar-link:hover {
      color: rgb(233,50,117);
+ }
+
+.container {
+    margin: 0 auto;
+    max-width: 64rem;
+}
 
 
 @media (min-width: 640px) {
-    html { font-size: 112%; }
+    html {font-size: 112%; }
  
     .column {
         float: left;
@@ -83,7 +77,6 @@ body {
     .column.two-thirds { width: 66.7%; }
     .column.half { width: 50%; }
     .column.third { width: 33.3%; }
-    .column.fourth { width: 25%; }
     .column.flow-opposite { float: right; }
 }
 
@@ -101,3 +94,5 @@ body {
 .clearfix::after {
     clear: both;
 }
+
+

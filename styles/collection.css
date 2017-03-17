@@ -39,11 +39,4 @@ body.collection {
      width: 80%;
  }
 
-.links-container .navbar-link:active {
-    color: rgb(233, 50, 117);
-}
 
-
-.links-container .navbar-link:hover {
-    background-color: white;
-}
