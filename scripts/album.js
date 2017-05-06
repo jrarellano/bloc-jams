@@ -32,35 +32,7 @@ var createSongRow = function(songNumber, songName, songLength) {
      ;
 
     var $row = $(template);
-    
-    /*var clickHandler = function() {
-	var songNumber = parseInt($(this).attr('data-song-number'));
 
-	if (currentlyPlayingSongNumber !== null) {
-		// Revert to song number for currently playing song because user started playing new song.
-		var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
-		currentlyPlayingCell.html(currentlyPlayingSongNumber);
-	}
-	if (currentlyPlayingSongNumber !== songNumber) {
-		// Switch from Play -> Pause button to indicate new song is playing.
-        setSong(songNumber);
-        currentSoundFile.play();
-		$(this).html(pauseButtonTemplate);
-		//currentlyPlayingSongNumber = songNumber;
-        currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-        setSong(songNumber);
-        updatePlayerBarSong();
-	} else if (currentlyPlayingSongNumber === songNumber) {
-        if (currentSoundFile.isPaused()) {
-        
-        
- 		$(this).html(playButtonTemplate);
-        $('.main-controls .play-pause').html(playerBarPlayButton);
-		currentlyPlayingSongNumber = null;
-        currentSongFromAlbum = null;
-	}
-};
-*/
     
      var clickHandler = function() {
 	var songNumber = parseInt($(this).attr('data-song-number'));
@@ -218,11 +190,29 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+// ADDED CODE
+var $playButton = $('.main-controls .play-pause');
 
+// ADDED CODE
+    
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
-    
+    $playButton.click(togglePlayFromPlayerBar);
 });
 
+// ADDED CODE
+function togglePlayFromPlayerBar(){
+     
+		if (currentSoundFile.isPaused()) {
+               $(this).html(pauseButtonTemplate);
+               $('.main-controls .play-pause').html(playerBarPauseButton);
+               currentSoundFile.play();
+           } else {
+               $(this).html(playButtonTemplate);
+               $('.main-controls .play-pause').html(playerBarPlayButton);
+               currentSoundFile.pause();   
+            }
+	
+};
