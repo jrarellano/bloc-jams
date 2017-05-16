@@ -93,6 +93,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 ///
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
+            console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
         }
      };
     
@@ -208,8 +209,7 @@ var updatePlayerBarSong = function() {
 var nextSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     // Note that we're _incrementing_ the song here
-    console.log(currentSongIndex++)
-    
+    currentSongIndex++;
 
     if (currentSongIndex >= currentAlbum.songs.length) {
         currentSongIndex = 0;
