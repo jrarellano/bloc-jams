@@ -276,14 +276,6 @@ var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
-$(document).ready(function() {
-    setCurrentAlbum(albumPicasso);
-    setupSeekBars();
-    $previousButton.click(previousSong);
-    $nextButton.click(nextSong);
-    
-});
-
 //Assignment
 // ADDED CODE
 var $playButton = $('.main-controls .play-pause');
