@@ -37,7 +37,10 @@ var createSongRow = function(songNumber, songName, songLength) {
        '<tr class="album-view-song-item">'
      + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>' 
      + '  <td class="song-item-title">' + songName + '</td>'
-     + '  <td class="song-item-duration">' + songLength + '</td>'
+	 
+	//------ Assignment CODE - START -------//
+     + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'	 
+	//------ Assignment CODE - END -------//
      + '</tr>'
      ;
 
@@ -132,6 +135,10 @@ var updateSeekBarWhileSongPlays = function() {
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
+			 
+			//------ Assignment CODE - START -------//
+			 setCurrentTimeInPlayerBar(); 
+			//------ Assignment CODE - END -------//
          });
      }
  };
@@ -145,7 +152,7 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
     // #2
     var percentageString = offsetXPercent + '%';
     $seekBar.find('.fill').width(percentageString);
-    $seekBar.find('.thumb').css({left: percentageString});
+    $seekBar.find('.thumb').css({left: percentageString});	
  };
 
 var setupSeekBars = function() {
@@ -204,6 +211,10 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+	
+	//------ ASSIGNMENT CODE - START -------//
+	setTotalTimeInPlayerBar();
+	//------ ASSIGNMENT CODE - END -------//
 };
 
 var nextSong = function() {
@@ -276,6 +287,7 @@ var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
+
 //Assignment
 // ADDED CODE
 var $playButton = $('.main-controls .play-pause');
@@ -284,6 +296,7 @@ var $playButton = $('.main-controls .play-pause');
     
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
+    setupSeekBars();
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
     $playButton.click(togglePlayFromPlayerBar);
@@ -304,3 +317,40 @@ function togglePlayFromPlayerBar(){
 	
 };
 
+//------ Assignment CODE - START -------//
+
+var currentTime, currentTiming;
+
+function setCurrentTimeInPlayerBar() {
+	currentSoundFile.bind('timeupdate', function(event) {
+			 currentTiming = this.getTime();
+			 console.log(currentTiming);
+             currentTime = this.getTime();
+			 var $currentTime = $('.current-time');
+			 $currentTime.text(filterTimeCode(currentTime));
+         });
+}
+
+var totalTime;
+function setTotalTimeInPlayerBar() {
+	currentSoundFile.bind('timeupdate', function(event) {
+             totalTime = this.getDuration();
+			 var $totalTime = $('.total-time');
+			 $totalTime.text(filterTimeCode(totalTime));
+         });
+}
+
+function filterTimeCode(decimalTime) {
+	var templateTime = '';
+	var timeInSeconds = Math.floor(decimalTime);
+	var timeInMinutes = Math.floor(decimalTime / 60);
+	return toTwoCharacters(timeInMinutes) + ':' + toTwoCharacters(timeInSeconds - (timeInMinutes * 60));
+	
+	function toTwoCharacters(_time) {		
+		if (_time.toString().length == 1)
+			return '0' + _time.toString();
+		else
+			return _time.toString();
+	}
+}
+//------ Assignment CODE - END -------//
